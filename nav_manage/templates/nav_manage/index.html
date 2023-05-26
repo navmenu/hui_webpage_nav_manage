@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员主页</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'nav_manage/style_image_01.css' %}">
+</head>
+<body class="gray-bg" style="text-align:center">
+<div class="text-center animated fadeInDown">
+    <h2 class="font-bold">网站导航管理员主页</h2>
+
+    {% include 'nav_manage/admin_common_info.html' %}
+    {% include 'nav_manage/admin_common_menu.html' %}
+
+    <div id="wrapper">
+        <!--左侧导航开始-->
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="nav-close"><i class="fa fa-times-circle"></i>
+            </div>
+            <div class="sidebar-collapse">
+                <ul class="nav" id="side-menu" style="text-align:left">
+                    <!-- 左侧导航中的item-->
+                    {% include 'nav_manage/side_menu_items.html' %}
+                </ul>
+            </div>
+        </nav>
+        <!--左侧导航结束-->
+    </div>
+</div>
+</body>
+</html>

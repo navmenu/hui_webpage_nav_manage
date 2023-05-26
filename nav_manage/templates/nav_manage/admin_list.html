@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员列表</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'nav_manage/style_image_01.css' %}">
+</head>
+<body class="gray-bg" style="text-align:center">
+<h2>管理员列表</h2>
+<a role="button" class="btn btn-primary" type="button" target="_self" href="/nav_manage/create_admin">[新建管理员]</a>
+<div class="ibox float-e-margins" align="center">
+    <div class="ibox-title">
+        <h5>基本信息</h5>
+    </div>
+    <div class="ibox-content">
+        <table data-toggle="table" data-height="600" class="table text-nowrap" border="1" align="center">
+            <thead>
+            <tr>
+                {#表头细节BEGIN#}
+                <th>账号</th>
+                <th>昵称</th>
+                {#表头细节END#}
+                <th>能否创建其它管理员</th>
+                <th>能否查看管理员列表</th>
+                <th>能否编辑</th>
+                <th>能否排序</th>
+                <th>创建账号的账号</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for admin in admins %}
+                <tr>
+                    {% if admin %}
+                        {#内容细节BEGIN#}
+                        <td>{{ admin.username }}</td>
+                        <td>{{ admin.nickname }}</td>
+                        {#内容细节END#}
+                    {% else %}
+                        <td>账号</td>
+                        <td>昵称</td>
+                    {% endif %}
+                    <td>
+                        <center>{{ admin.permissions.can_create_admin |yesno:'是,否' }}</center>
+                    </td>
+                    <td>
+                        <center>{{ admin.permissions.can_select_admin |yesno:'是,否' }}</center>
+                    </td>
+                    <td>
+                        <center>{{ admin.permissions.can_edit |yesno:'是,否' }}</center>
+                    </td>
+                    <td>
+                        <center>{{ admin.permissions.can_sort |yesno:'是,否' }}</center>
+                    </td>
+                    <td>
+                        <center>{{ admin.created_by_uname }}</center>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加内容</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'nav_manage/style_image_01.css' %}">
+</head>
+<body class="gray-bg" style="text-align:center">
+<h2>添加内容</h2>
+<form action="/nav_manage/create_navi_lvl2/submit" method="post">
+    <div class="dandan">
+        <input type="text" name="navi_name" id="navi_name" value="{{ navi_name }}" readonly>
+    </div>
+    <div class="dandan">
+        <input type="text" name="name" id="name" placeholder="内容名称">
+    </div>
+    <div class="dandan">
+        <input type="text" name="text" id="text" placeholder="内容文字">
+    </div>
+    <div class="dandan">
+        <input type="text" name="link" id="link" placeholder="跳转链接">
+    </div>
+    <div class="dandan">
+        <label><input type="checkbox" name="is_escrow" id="is_escrow">是否担保</label>
+    </div>
+    {% csrf_token %}
+    <input type="submit" value="添加">
+</form>
+</body>
+</html>

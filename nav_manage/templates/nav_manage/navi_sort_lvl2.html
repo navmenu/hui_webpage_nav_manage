@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>排序内容</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'nav_manage/style_image_01.css' %}">
+</head>
+<body class="gray-bg" style="text-align:center">
+<h2>排序内容</h2>
+<form action="/nav_manage/sort_navi_lvl2/submit" method="post">
+    <div class="dandan">
+        <label>分类名称：<input type="text" name="navi_name" id="navi_name" value="{{ navi_name }}" readonly></label>
+    </div>
+    <div class="ibox float-e-margins" align="center">
+        <div class="ibox-title">
+            <h5>排序内容</h5>
+        </div>
+        <div class="ibox-content">
+            <table data-toggle="table" data-height="600" class="table text-nowrap" border="1" align="center">
+                <thead>
+                <tr>
+                    <th>内容名称</th>
+                    <th>修改序号</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td>
+                            <center>{{ item.name }}</center>
+                        </td>
+                        <td>
+                            <input type="text" name="navi_lvl2_name_[{{ item.name }}]" value="{{ item.sort }}">
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% csrf_token %}
+    <input type="submit" value="排序">
+</form>
+</body>
+</html>

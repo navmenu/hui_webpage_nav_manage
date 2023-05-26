@@ -1,0 +1,37 @@
+<div class="ibox float-e-margins" align="center">
+    <div class="ibox-title">
+        <h5>管理员导航</h5>
+    </div>
+    <div class="ibox-content">
+        <table data-toggle="table" data-height="600" class="table text-nowrap" border="1">
+            <thead>
+            <tr>
+                <th>管理导航</th>
+                {% if admin.permissions.can_select_admin %}
+                    <th>管理员列表</th>
+                {% endif %}
+                {% if admin.permissions.can_select_admin %}
+                    <th>我创的管理员</th>
+                {% endif %}
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <a role="button" class="btn btn-primary" type="button" target="_self" href="/nav_manage/navi_list">[管理导航]</a>
+                </td>
+                {% if admin.permissions.can_select_admin %}
+                    <td>
+                        <a role="button" class="btn btn-primary" type="button" target="_self" href="/nav_manage/admin_list">[管理员列表]</a>
+                    </td>
+                {% endif %}
+                {% if admin.permissions.can_create_admin %}
+                    <td>
+                        <a role="button" class="btn btn-primary" type="button" target="_self" href="/nav_manage/admin_of_mine_list">[我创的管理员]</a>
+                    </td>
+                {% endif %}
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

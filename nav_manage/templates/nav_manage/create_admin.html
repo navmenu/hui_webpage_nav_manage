@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建管理员</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'nav_manage/style_image_01.css' %}">
+</head>
+<body class="gray-bg" style="text-align:center">
+<h2>创建管理员</h2>
+<form action="/nav_manage/create_admin/submit" method="post">
+    <div class="dandan">
+        <input type="text" name="username" id="username" placeholder="请输入账号">
+    </div>
+    <div class="dandan">
+        <input type="password" name="password" id="password" placeholder="输入密码">
+    </div>
+    <div class="dandan">
+        <input type="text" name="nickname" id="nickname" placeholder="输入昵称">
+    </div>
+    <div class="dandan">
+        <label><input type="checkbox" name="can_create_admin" id="can_create_admin">能否创建其它管理员</label>
+        <label><input type="checkbox" name="can_select_admin" id="can_select_admin">能否查看管理员列表</label>
+    </div>
+    <div class="dandan">
+        <label><input type="checkbox" name="can_edit" id="can_edit" checked>能否编辑</label>
+    </div>
+    <div class="dandan">
+        <label><input type="checkbox" name="can_sort" id="can_sort" checked>能否排序</label>
+    </div>
+    {% csrf_token %}
+    <input type="submit" value="创建">
+</form>
+</body>
+</html>

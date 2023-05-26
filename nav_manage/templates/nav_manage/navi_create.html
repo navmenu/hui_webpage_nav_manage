@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加分类</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'nav_manage/style_image_01.css' %}">
+</head>
+<body class="gray-bg" style="text-align:center">
+<h2>添加分类</h2>
+<form action="/nav_manage/create_navi/submit" method="post">
+    <div class="dandan">
+        <input type="text" name="name" id="name" placeholder="分类名称">
+    </div>
+    {% csrf_token %}
+    <input type="submit" value="添加">
+</form>
+</body>
+</html>

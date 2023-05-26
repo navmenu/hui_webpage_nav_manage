@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>删除分类</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'nav_manage/style_image_01.css' %}">
+</head>
+<body class="gray-bg" style="text-align:center">
+<h2>删除分类</h2>
+<form action="/nav_manage/delete_navi/submit" method="post">
+    <div class="dandan">
+        <input type="text" name="name" id="name" value="{{ name }}" readonly>
+    </div>
+    <div class="dandan">
+        <label><input type="checkbox" name="force" id="force" checked>是否强制删除(将会删除分类下的所有内容)</label>
+    </div>
+    {% csrf_token %}
+    <input type="submit" value="删除">
+</form>
+</body>
+</html>
