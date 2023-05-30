@@ -1,5 +1,4 @@
 # use the normal settings
-from hui_webpage_nav_manage import settings
 from hui_webpage_nav_manage.settings import *
 
 print("---------------")
