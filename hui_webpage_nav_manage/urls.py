@@ -19,9 +19,11 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic.base import RedirectView
 
+import nav_manage.views
 from utils.utils_static import static_urlpatterns, static_urlpattern
 
 urlpatterns = [
+    path('', nav_manage.views.index),
     path('admin/', admin.site.urls),
     path("nav_manage/", include("nav_manage.urls")),
 ]
