@@ -1,0 +1,94 @@
+<td>
+    {{ item.navi.name }}
+</td>
+
+<td>
+    {% if admin.permissions.can_edit %}
+        {% if item.nextNavis|length > 0 %}
+            <a class="J_menuItem">[不能删除]</a>
+        {% elif item.naviLvl2s|length > 0 %}
+            <a class="J_menuItem" href="/nav_manage/delete_navi?name={{ item.navi.name }}&force=True">[删除分类]</a>
+        {% else %}
+            <a class="J_menuItem" href="/nav_manage/delete_navi?name={{ item.navi.name }}">[删除分类]</a>
+        {% endif %}
+    {% endif %}
+</td>
+
+<td>
+    {% if item.naviLvl2s|length > 0 %}
+        <table data-toggle="table" data-height="600" class="table text-nowrap" border="1" align="center">
+            <thead>
+            <tr>
+                <th>内容名称</th>
+                <th>内容文字</th>
+                <th>跳转链接</th>
+                <th>是否担保</th>
+                <th>排序序号</th>
+                {% if admin.permissions.can_edit %}
+                    <th>删除内容</th>
+                {% endif %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for naviLvl2 in item.naviLvl2s %}
+                <tr>
+                    <td>
+                        {{ naviLvl2.name }}
+                    </td>
+                    <td>
+                        {{ naviLvl2.text }}
+                    </td>
+                    <td>
+                        <a href="{{ naviLvl2.link }}" target="_blank">{{ naviLvl2.link }}</a>
+                    </td>
+                    <td>
+                        {{ naviLvl2.isEscrow |yesno:'是,否' }}
+                    </td>
+                    <td>
+                        {{ naviLvl2.sort }}
+                    </td>
+                    {% if admin.permissions.can_edit %}
+                        <td>
+                            <a role="button" class="btn btn-primary" type="button" target="_self" href="/nav_manage/delete_navi_lvl2?navi_name={{ naviLvl2.naviName }}&name={{ naviLvl2.name }}">[删除]</a>
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    {% if admin.permissions.can_edit %}
+        <a class="J_menuItem" href="/nav_manage/create_navi_lvl2?navi_name={{ item.navi.name }}">[添加内容]</a>
+        <br>
+    {% endif %}
+    {% if admin.permissions.can_sort and item.naviLvl2s|length >= 2 %}
+        <a class="J_menuItem" href="/nav_manage/sort_navi_lvl2?navi_name={{ item.navi.name }}">[排序内容]</a>
+        <br>
+    {% endif %}
+</td>
+
+{#这里其实是个递归操作 在当前语境下的item就是子分类的item 直到最终没有子类时候结束#}
+<td>
+    {% if item.nextNavis|length > 0 %}
+        <table data-toggle="table" data-height="600" class="table text-nowrap" border="1" align="center">
+            {% include 'nav_manage/navi_list_head.html' %}
+            <tbody>
+            {% for item in item.nextNavis %}
+                <tr>
+                    {% include 'nav_manage/navi_list_item.html' %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    {% if admin.permissions.can_edit %}
+        <a role="button" class="btn btn-primary" type="button" target="_self"
+           href="/nav_manage/create_navi?parent_nvid={{ item.navi.id }}&parent_name={{ item.navi.name }}">[添加分类]</a>
+        <br>
+    {% endif %}
+    {% if admin.permissions.can_sort and item.nextNavis|length >= 2 %}
+        <a role="button" class="btn btn-primary" type="button" target="_self"
+           href="/nav_manage/sort_navi?parent_nvid={{ item.navi.id }}">[排序分类]</a>
+        <br>
+    {% endif %}
+</td>

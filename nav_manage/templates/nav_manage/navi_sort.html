@@ -22,13 +22,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for item in items %}
+                {% for navi in navis %}
                     <tr>
                         <td>
-                            <center>{{ item.navi.name }}</center>
+                            <center>{{ navi.name }}</center>
                         </td>
                         <td>
-                            <input type="text" name="navi_name_[{{ item.navi.name }}]" value="{{ item.navi.sort }}">
+                            <input type="text" name="navi_name_[{{ navi.name }}]" value="{{ navi.sort }}">
                         </td>
                     </tr>
                 {% endfor %}

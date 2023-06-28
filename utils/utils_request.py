@@ -128,6 +128,19 @@ class Client:
             return response.reason, response.status_code
         return response.json(), 200
 
+    def get_navi_orders(self, parent_nvid):
+        params = {
+            "parent_nvid": parent_nvid,
+        }
+        headers = {
+            'User-Agent': 'Mozilla/5.0',
+            'admin_manage_token': self.token,
+        }
+        response = requests.get(self.prefix + 'get_navi_orders', params=params, headers=headers)
+        if response.status_code != 200:
+            return response.reason, response.status_code
+        return response.json(), 200
+
     def list_navi_lvl2(self, navi_name):
         params = {
             "navi_name": navi_name,

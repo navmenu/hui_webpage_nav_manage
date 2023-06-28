@@ -87,12 +87,13 @@ def delete_navi_submit_page(request):
 
 
 def sort_navi_page(request):
+    parent_nvid = int(request.GET.get("parent_nvid", 0))
     admin_manage_token = request.COOKIES.get("admin_manage_token")
     client = utils.utils_request.Client(prefix=settings.BACKEND_API_PREFIX, token=admin_manage_token)
-    data, status_code = client.list_navi()
+    data, status_code = client.get_navi_orders(parent_nvid=parent_nvid)
     assert status_code is 200
-    items = data.get('items')
-    assert isinstance(items, list)
+    navis = data.get('navis')
+    assert isinstance(navis, list)
     return render(request, 'nav_manage/navi_sort.html', locals())
 
 
