@@ -9,6 +9,14 @@
 <body class="gray-bg" style="text-align:center">
 <h2>添加分类</h2>
 <form action="/nav_manage/create_navi/submit" method="post">
+    {% if parent_name|length > 0 %}
+        <div class="dandan">
+            <label>前级分类名称<input type="text" name="parent_name" id="parent_name" value="{{ parent_name }}" readonly></label>
+        </div>
+        <div class="dandan">
+            <label>前级分类编号<input type="text" name="parent_nvid" id="parent_nvid" value="{{ parent_nvid }}" readonly></label>
+        </div>
+    {% endif %}
     <div class="dandan">
         <input type="text" name="name" id="name" placeholder="分类名称">
     </div>

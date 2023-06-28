@@ -32,6 +32,8 @@ def navi_list_page(request):
 
 
 def create_navi_page(request):
+    parent_name = request.GET.get("parent_name", "")
+    parent_nvid = request.GET.get("parent_nvid", 0)
     return render(request, 'nav_manage/navi_create.html', locals())
 
 
@@ -41,6 +43,7 @@ def create_navi_submit_page(request):
         client = utils.utils_request.Client(prefix=settings.BACKEND_API_PREFIX, token=admin_manage_token)
         data, status_code = client.create_navi(
             name=str(request.POST.get('name')),
+            parent_nvid=int(request.POST.get('parent_nvid', 0))
         )
         if status_code != 200:
             logger.warning("status_code={} != 200".format(status_code))

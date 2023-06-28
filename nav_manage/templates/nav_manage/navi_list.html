@@ -14,9 +14,7 @@
         td {
             max-width: 300px;
             width: auto;
-            {#white-space: nowrap;#}
-            {#overflow: hidden;#}
-            {#text-overflow: ellipsis;#}
+        {#white-space: nowrap;#}{#overflow: hidden;#}{#text-overflow: ellipsis;#}
         }
     </style>
 </head>
@@ -43,10 +41,14 @@
                     <i class="fa fa-fa-fa"></i>
                     <span class="nav-label">[ {{ item.navi.name }} ]</span>
                     {% if admin.permissions.can_edit %}
+                        {% if admin.permissions.can_edit %}
+                            <a role="button" class="btn btn-primary" type="button" target="_self"
+                               href="/nav_manage/create_navi?parent_nvid={{ item.navi.id }}&parent_name={{ item.navi.name }}">[添加下层分类]</a>
+                        {% endif %}
                         {% if item.naviLvl2s|length > 0 %}
-                            <a class="J_menuItem" href="/nav_manage/delete_navi?name={{ item.navi.name }}&force=True">[删除分类]</a>
+                            <a class="J_menuItem" href="/nav_manage/delete_navi?name={{ item.navi.name }}&force=True">[删除当前分类]</a>
                         {% else %}
-                            <a class="J_menuItem" href="/nav_manage/delete_navi?name={{ item.navi.name }}">[删除分类]</a>
+                            <a class="J_menuItem" href="/nav_manage/delete_navi?name={{ item.navi.name }}">[删除当前分类]</a>
                         {% endif %}
                     {% endif %}
                     <span class="fa arrow"></span>

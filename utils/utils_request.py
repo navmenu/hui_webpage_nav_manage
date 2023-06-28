@@ -87,9 +87,10 @@ class Client:
             return response.reason, response.status_code
         return response.json(), 200
 
-    def create_navi(self, name):
+    def create_navi(self, name, parent_nvid):
         params = {
             "name": name,
+            "parent_nvid": parent_nvid,
         }
         headers = {
             'User-Agent': 'Mozilla/5.0',
