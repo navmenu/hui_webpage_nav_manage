@@ -3,6 +3,10 @@
     <th>分类名称</th>
     <th>分类操作</th>
     <th>分类内容</th>
-    <th>二级分类</th>
+    {% if item is None %}
+        <th>二级分类</th>
+    {% else %}
+        <th>三级分类</th>
+    {% endif %}
 </tr>
 </thead>

@@ -57,13 +57,16 @@
             </tbody>
         </table>
     {% endif %}
-    {% if admin.permissions.can_edit %}
-        <a class="J_menuItem" href="/nav_manage/create_navi_lvl2?navi_name={{ item.navi.name }}">[添加内容]</a>
-        <br>
-    {% endif %}
-    {% if admin.permissions.can_sort and item.naviLvl2s|length >= 2 %}
-        <a class="J_menuItem" href="/nav_manage/sort_navi_lvl2?navi_name={{ item.navi.name }}">[排序内容]</a>
-        <br>
+    {#限制只有2级以及2级以上的分类能添加内容#}
+    {% if item.navi.parentNvid != '0' %}
+        {% if admin.permissions.can_edit %}
+            <a class="J_menuItem" href="/nav_manage/create_navi_lvl2?navi_name={{ item.navi.name }}">[添加内容]</a>
+            <br>
+        {% endif %}
+        {% if admin.permissions.can_sort and item.naviLvl2s|length >= 2 %}
+            <a class="J_menuItem" href="/nav_manage/sort_navi_lvl2?navi_name={{ item.navi.name }}">[排序内容]</a>
+            <br>
+        {% endif %}
     {% endif %}
 </td>
 
@@ -81,18 +84,21 @@
             </tbody>
         </table>
     {% endif %}
-    {% if admin.permissions.can_edit %}
-        <label> [给"{{ item.navi.name }}"]
-            <a role="button" class="btn btn-primary" type="button" target="_self"
-               href="/nav_manage/create_navi?parent_nvid={{ item.navi.id }}&parent_name={{ item.navi.name }}">[添加分类]</a>
-        </label>
-        <br>
-    {% endif %}
-    {% if admin.permissions.can_sort and item.nextNavis|length >= 2 %}
-        <label> [给"{{ item.navi.name }}"]
-            <a role="button" class="btn btn-primary" type="button" target="_self"
-               href="/nav_manage/sort_navi?parent_nvid={{ item.navi.id }}">[排序分类]</a>
-        </label>
-        <br>
+    {#限制只有1级分类能添加2级分类，当然想放开也是可以的#}
+    {% if item.navi.parentNvid == '0' %}
+        {% if admin.permissions.can_edit %}
+            <label> [给"{{ item.navi.name }}"]
+                <a role="button" class="btn btn-primary" type="button" target="_self"
+                   href="/nav_manage/create_navi?parent_nvid={{ item.navi.id }}&parent_name={{ item.navi.name }}">[添加分类]</a>
+            </label>
+            <br>
+        {% endif %}
+        {% if admin.permissions.can_sort and item.nextNavis|length >= 2 %}
+            <label> [给"{{ item.navi.name }}"]
+                <a role="button" class="btn btn-primary" type="button" target="_self"
+                   href="/nav_manage/sort_navi?parent_nvid={{ item.navi.id }}">[排序分类]</a>
+            </label>
+            <br>
+        {% endif %}
     {% endif %}
 </td>
